@@ -1,0 +1,86 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div class="content-header">
+    <div class="container">
+        <div class="row justify-content-end">
+          {{user_name}}  
+        </div>
+      </div>
+    <div class="container">
+    <div class="row mb-2">
+    <div class="col-sm-6">
+    <h1 class="m-0"> Purchases </h1>
+    </div>
+    <div class="col-sm-6">
+    <ol class="breadcrumb float-sm-right">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/purchases">Purchases</a></li>
+    
+    </ol>
+    </div>
+    </div>
+    </div>
+
+
+  <br>
+
+<section class="content">
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="box box-primary">
+                    
+            <div class="box-header">
+            <a href="/purchases/create" class="btn btn-success">New Purchase</a>
+            </div>
+            <br>
+
+
+            <div class="box-body no-padding">
+                <table id="tb_purchases" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                    <th style="width: 10px">#</th>
+                    <th>Supplier</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Value</th>
+                    <th>Discount(%)</th>
+                    <th>Value with Discount</th>
+
+
+                    <th style="width: 140px">&nbsp;</th>
+                    
+                    
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    {% for purchase in purchases %}
+                    <tr>
+                    <td>{{purchase.purchase_id}}</td>
+                    <td>{{purchase.supplier_name}}</td>
+                    <td>{{purchase.date_purchase}}</td>
+                    <td>{{purchase.time_purchase}}</td>
+                    <td>{{purchase.value_purchase}}</td>
+                    <td>{{purchase.percentage_discount}}</td>
+                    <td>{{purchase.final_value_after_discount}}</td>
+                    <td>
+                        <a href="/purchases/{{purchase.purchase_id}}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Show</a>
+                        <a href="/purchases/{{purchase.purchase_id}}/delete" onclick="return confirm('Do you want to dele this record  id = {{purchase.purchase_id}}?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Delete</a>
+                    </td>
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+                </table>
+            </div>
+        <!-- /.box-body -->
+        </div>
+     </div>
+</div>   
+</section>
+{% endblock %}
+

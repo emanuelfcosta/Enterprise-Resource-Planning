@@ -1,0 +1,170 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div class="content-header">
+  <div class="container">
+    <div class="row justify-content-end">
+      {{user_name}}  
+    </div>
+  </div>
+  
+    <div class="container">
+    <div class="row mb-2">
+    <div class="col-sm-6">
+    <h1 class="m-0"> Reports </h1>
+    </div>
+    <div class="col-sm-6">
+    <ol class="breadcrumb float-sm-right">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/report">Reports</a></li>
+    
+    </ol>
+    </div>
+    </div>
+    </div>
+
+
+  <br>
+
+  <script>
+    function check_fields() {
+
+      var v_begin_date = document.getElementById('begin_date').value;
+
+          if (v_begin_date == ""){
+            
+
+            swal('Warning!!!', ' From date must be valid!' , 'warning');
+
+            return false;
+          } 
+
+
+          var v_end_date = document.getElementById('end_date').value;
+
+            if (v_end_date == ""){
+              
+
+              swal('Warning!!!', ' To date must be valid!' , 'warning');
+
+              return false;
+            } 
+
+
+
+   
+            var from_date = new Date(v_begin_date);
+            var to_date = new Date(v_end_date);
+    
+            if (from_date > to_date){
+    
+                swal('Warning!!!', ' From date must be less than  to date!' , 'warning');
+                return false;
+    
+            }
+  
+    }
+    
+    </script>
+    
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-success">
+          <div class="box-header with-border">
+            <h3 class="box-title">Select the Report type:</h3>
+          </div>
+          <!-- /.box-header -->
+          <!-- form start -->
+          <form id="myForm" role="form" action="/report" method="post" onsubmit="return check_fields()">
+            <div class="box-body">
+               
+              <div class="form-group">
+                <div class="radio">
+                  <label style="font-size:large ;">
+                    <input type="radio" name="report_type" id="report_type1" value="sales" checked>
+                    Sales
+                  </label>
+                </div>
+                <div class="radio">
+                  <label style="font-size:large ;">
+                    <input type="radio" name="report_type" id="report_type2" value="purchases">
+                    Purchases
+                  </label>
+                </div>
+                <div class="radio">
+                  <label style="font-size:large ;">
+                    <input type="radio" name="report_type" id="report_type3" value="account_payable_unpaid">
+                    Account Payable - Unpaid
+                  </label>
+                </div>
+                <div class="radio">
+                  <label style="font-size:large ;">
+                    <input type="radio" name="report_type" id="report_type4" value="account_payable_paid">
+                    Account Payable - Paid
+                  </label>
+                </div>
+                <div class="radio">
+                  <label style="font-size:large ;">
+                    <input type="radio" name="report_type" id="report_type5" value="account_receivable_unpaid">
+                    Account Receivable - Unpaid
+                  </label>
+                </div>
+                <div class="radio">
+                  <label style="font-size:large ;">
+                    <input type="radio" name="report_type" id="report_type6" value="account_receivable_paid">
+            
+                    Account Receivable - Paid
+                  </label>
+                </div>
+                <div class="radio">
+                  <label style="font-size:large ;">
+                    <input  type="radio" name="report_type" id="report_type7" value="cashflow">
+                    Cash Flow
+                  </label>
+                </div>
+  
+                <br>
+                <div class="row">
+                  <div class="col-xs-9 col-md-4">
+                      <h3>Period</h3> 
+                      
+                  </div>
+              </div>
+              
+  
+                <div class="row">
+                  <div class="col-xs-6 col-md-2">
+                    <div class="form-group" >
+                        <label>From:</label>
+                        <input type="date" class="form-control" id="begin_date" name="begin_date" >
+                    </div>
+                   </div>
+  
+                   <div class="col-xs-6 col-md-2">
+                    <div class="form-group" >
+                        <label>To:</label>
+                        <input type="date" class="form-control" id="end_date" name="end_date" >
+                    </div>
+                  </div>
+  
+      
+                </div>
+               
+              </div>
+  
+            
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+              <button type="submit" class="btn btn-success" >Generate Report</button>
+            </div>
+          </form>
+        </div>
+        </div>
+    </div>   
+</section>
+{% endblock %}
+

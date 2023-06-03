@@ -1,0 +1,184 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<script>
+
+  
+
+
+//----------------------------------------------------
+function check_fields() {
+
+    
+
+
+// //product_group
+// if (!$("#product_group").val()) {
+//  swal('Warning!!!', 'The product must have a group!' , 'warning');
+
+// return false;
+// }
+
+
+
+}
+
+
+
+
+</script>
+
+
+
+<div class="content-header">
+      <div class="container">
+        <div class="row justify-content-end">
+          {{user_name}}  
+        </div>
+    </div>
+    <div class="container">
+    <div class="row mb-2">
+    <div class="col-sm-6">
+    <h1 class="m-0"> Update Client </h1>
+    </div>
+    <div class="col-sm-6">
+    <ol class="breadcrumb float-sm-right">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/clients">Clients</a></li>
+    
+    </ol>
+    </div>
+    </div>
+    </div>
+
+  <br>
+
+  
+<section class="content">
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="box box-primary">
+                    
+            
+            <br>
+
+            <div class="box-body no-padding">
+              <form role="form" action="/clients/{{client.id}}" method="post" onsubmit="return check_fields()">
+                <div class="box-body">
+
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required value="{{client.name}}"  >
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="cnpj_cpf">CNPJ/CPF</label>
+                    <input type="text" class="form-control" id="cnpj_cpf" name="cnpj_cpf" value="{{client.cnpj_cpf}}"   >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="ie">IE</label>
+                    <input type="text" class="form-control" id="ie" name="ie" value="{{client.ie}}" >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="zip_code">Zip Code</label>
+                    <input type="text" class="form-control" id="zip_code" name="zip_code" value="{{client.zip_code}}"  >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" name="address" required value="{{client.address}}"  >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="number">Number</label>
+                    <input type="text" class="form-control" id="number" name="number" value="{{client.number}}"   >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="complement">Complement</label>
+                    <input type="text" class="form-control" id="complement" name="complement" value="{{client.complement}}"  >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="district">District</label>
+                    <input type="text" class="form-control" id="district" name="district" value="{{client.district}}"   >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" class="form-control" id="city" name="city" value="{{client.city}}"   >
+                  </div>
+
+              
+                  <div class="form-group">
+                    <label>State( states of Brazil):</label>
+                    <select class="form-control" id="state" name="state">
+                      <option {% if client.state == "AC" %} selected {% endif %} value="AC">AC</option>
+                      <option {% if client.state == "AL" %} selected {% endif %} value="AL">AL</option>
+                      <option {% if client.state == "AP" %} selected {% endif %} value="AP">AP</option>
+                      <option {% if client.state == "AM" %} selected {% endif %} value="AM">AM</option>
+                      <option {% if client.state == "BA" %} selected {% endif %} value="BA">BA</option>
+                      <option {% if client.state == "CE" %} selected {% endif %} value="CE">CE</option>
+                      <option {% if client.state == "DF" %} selected {% endif %} value="DF">DF</option>
+                      <option {% if client.state == "ES" %} selected {% endif %} value="ES">ES</option>
+                      <option {% if client.state == "GO" %} selected {% endif %} value="GO">GO</option>
+                      <option {% if client.state == "MA" %} selected {% endif %} value="MA">MA</option>
+                      <option {% if client.state == "MT" %} selected {% endif %} value="MT">MT</option>
+                      <option {% if client.state == "MS" %} selected {% endif %} value="MS">MS</option>
+                      <option {% if client.state == "MG" %} selected {% endif %} value="MG">MG</option>
+                      <option {% if client.state == "PA" %} selected {% endif %}value="PA">PA</option>
+                      <option {% if client.state == "PB" %} selected {% endif %} value="PB">PB</option>
+                      <option {% if client.state == "PR" %} selected {% endif %} value="PR">PR</option>
+                      <option {% if client.state == "PE" %} selected {% endif %} value="PE">PE</option>
+                      <option {% if client.state == "PI" %} selected {% endif %} value="PI">PI</option>
+                      <option {% if client.state == "RJ" %} selected {% endif %} value="RJ">RJ</option>
+                      <option {% if client.state == "RN" %} selected {% endif %} value="RN">RN</option>
+                      <option {% if client.state == "RS" %} selected {% endif %} value="RS">RS</option>
+                      <option {% if client.state == "RO" %} selected {% endif %} value="RO">RO</option>
+                      <option {% if client.state == "RR" %} selected {% endif %} value="RR">RR</option>
+                      <option {% if client.state == "SC" %} selected {% endif %}value="SC">SC</option>
+                      <option {% if client.state == "SP" %} selected {% endif %}value="SP">SP</option>
+                      <option {% if client.state == "SE" %} selected {% endif %}value="SE">SE</option>
+                      <option {% if client.state == "TO" %} selected {% endif %}value="TO">TO</option>
+                    </select>
+                  </div>
+      
+
+
+
+
+
+                  <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="text" class="form-control" id="phone" name="phone" value="{{client.phone}}"   >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="cell_phone">Cell Phone</label>
+                    <input type="text" class="form-control" id="cell_phone" name="cell_phone" value="{{client.cell_phone}}"   >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{client.email}}"   >
+                  </div>
+      
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                  <button type="submit" class="btn btn-success">Update</button>
+                </div>
+              </form>
+                
+            </div>
+        <!-- /.box-body -->
+        </div>
+     </div>
+</div>   
+</section>
+{% endblock %}
+

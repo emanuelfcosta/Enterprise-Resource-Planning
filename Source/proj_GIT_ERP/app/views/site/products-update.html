@@ -1,0 +1,254 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<script>
+
+  
+
+function add_group_to_product(element) {
+// adiciona o centro custo na venda
+
+
+document.getElementById("id_group").value = document.getElementById("grid_group_product").rows[element.parentNode.parentNode.rowIndex].cells[0].innerHTML;
+document.getElementById("product_group").value = document.getElementById("grid_group_product").rows[element.parentNode.parentNode.rowIndex].cells[1].innerHTML;
+
+close_modal_group();
+
+}
+//--------------------------------------------------------------
+function close_modal_group(){
+    $('#modalGroupProduct').modal('hide');    
+    }
+//---------------------------------------------------------
+
+// convert comma to dot for database
+
+function convert_comma_dot(my_element){
+  
+  var value_with_dot = elemento.replace(',','.');
+  
+
+  my_element =  parseFloat(value_with_dot).toFixed(2); 
+
+  return my_element;
+  
+  }
+//----------------------------------------------------
+function check_fields() {
+
+    
+
+
+//product_group
+if (!$("#product_group").val()) {
+ swal('Warning!!!', 'The product must have a group!' , 'warning');
+
+return false;
+}
+
+
+
+}
+
+
+
+
+</script>
+
+<!-- ------------------------------------------------------------------------------ -->
+                <!--   Modal Group -->
+
+                <div class="modal fade" id="modalGroupProduct" tabindex="-1" role="dialog" aria-labelledby="modalGroupProductTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h2 class="modal-title" id="modalGroupProductTitle">Groups</h2>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+
+                      
+                      </div>
+                      <div class="modal-body">
+
+                          
+                              <table class="table table-bordered table-striped table-hover" id="grid_group_product">
+                                <thead>
+                                  <tr>
+                                    <th style="width: 10px">#</th>
+                                    <th>Name</th>
+                                    <th style="width: 140px">&nbsp;</th>
+                                  </tr>
+                                </thead>
+                                <tbody >
+                                  {% for group in groups %}
+                                  <tr>
+                                    <td>{{group.id}}</td>
+                                    <td>{{group.name}}</td>
+                                    <td>
+                                      <button type="button" class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="top"  onclick="add_group_to_product(this)">
+                                        <i class="fa fa-plus"></i> Select
+                                      </button>
+                                  
+                                      
+                                    </td>
+                                  </tr>
+                                  {% endfor%}
+                                </tbody>
+                              </table>
+                            
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- FIM -  Modal Group -->
+
+
+<div class="content-header">
+      <div class="container">
+        <div class="row justify-content-end">
+          {{user_name}}  
+        </div>
+    </div>
+    <div class="container">
+    <div class="row mb-2">
+    <div class="col-sm-6">
+    <h1 class="m-0"> Edit Product </h1>
+    </div>
+    <div class="col-sm-6">
+    <ol class="breadcrumb float-sm-right">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/products">Products</a></li>
+    
+    </ol>
+    </div>
+    </div>
+    </div>
+
+  <br>
+
+  <!-- <script>
+    function check_fields() {
+    
+      //nome
+    if (!$("#name").val())  {
+     swal('Attention!!!', 'The group must have a name!' , 'warning');
+      
+    return false;
+    }
+    
+    }
+    
+    </script> -->
+
+<section class="content">
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="box box-primary">
+                    
+            
+            <br>
+
+            <div class="box-body no-padding">
+              <form role="form" action="/products/{{product.id}}" method="post" onsubmit="return check_fields()">
+                <div class="box-body">
+
+                  <div class="form-group">
+                    <label for="reference">Reference</label>
+                    <input type="text" class="form-control" id="reference" name="reference" value="{{product.reference}}">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required  value="{{product.name}}">
+                  </div>      
+
+                  <div class="form-group " >
+                    <input type="hidden" class="form-control" id="id_group" name="id_group"  readonly value="{{product.id_group}}" >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="product_group">Group:</label>
+                    <input type="text" class="form-control" id="product_group" name="product_group"  readonly value="{{product.group_name}}" >
+                  </div>
+
+                      <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalGroupProduct">
+                      Select Group
+                    </button>
+
+                    <div class="form-group">
+                      <label for="stock">Stock:</label>
+                      <input type="number"   class="form-control" id="stock" name="stock" required step="0.01" value="{{product.stock}}">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="stock_min"> Minimum Stock:</label>
+                      <input type="number" class="form-control" id="stock_min" name="stock_min" required step="0.01" value="{{product.stock_min}}" >
+                    </div>
+
+                    <div class="form-group">
+                      <label for="purchase_price">Purchase Price $:</label>
+                      <input type="number" class="form-control" id="purchase_price" name="purchase_price" required step="0.01" value="{{product.purchase_price}}" >
+                    </div>
+
+                    <div class="form-group">
+                      <label for="sale_price">Sale Price R$:</label>
+                      <input type="number" class="form-control" id="sale_price" name="sale_price" required step="0.01" value="{{product.sale_price}}" >
+                    </div>
+
+                    <div class="form-group">
+                      <label for="expiration_date">Expiration Date:</label>
+                      <input type="date" class="form-control" id="expiration_date" name="expiration_date"   required value="{{product.expiration_date}}">
+                    </div>
+
+                    <div class="form-group">
+                      <label class="text-primary">Selecione a measuring unit</label>
+                      <select class="form-control" id="unit" name="unit">
+        
+                        <option  {% if product.unit == "Kg" %} selected {% endif %} value="Kg">Kg</option>
+                        <option {% if product.unit == "gramas" %} selected {% endif %} value="gramas">gramas</option>
+                        <option {% if product.unit == "litros" %} selected {% endif %} value="litros">litros</option>
+                        <option {% if product.unit == "caixas" %} selected {% endif %} value="caixas">caixas</option>
+                        <option {% if product.unit == "unidades" %} selected {% endif %}value="unidades">unidades</option>
+                        <option {% if product.unit == "outro" %} selected {% endif %}value="outro">outro</option>
+        
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="bar_code">Bar code:</label>
+                      <input type="text" class="form-control" id="bar_code" name="bar_code" value="{{product.bar_code}}" >
+                    </div>
+        
+                    <div class="form-group">
+                      <label>Notes:</label>
+                      <textarea class="form-control" rows="4" id="note" name="note"  > {{product.note}} </textarea>
+                    </div>
+        
+        
+        
+
+      
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                  <button type="submit" class="btn btn-success">Update</button>
+                </div>
+              </form>
+                
+            </div>
+        <!-- /.box-body -->
+        </div>
+     </div>
+</div>   
+</section>
+{% endblock %}
+

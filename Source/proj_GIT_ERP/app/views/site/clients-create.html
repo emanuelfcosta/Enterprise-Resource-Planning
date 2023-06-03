@@ -1,0 +1,184 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<script>
+
+  
+
+
+//----------------------------------------------------
+function check_fields() {
+
+    
+
+
+// //product_group
+// if (!$("#product_group").val()) {
+//  swal('Warning!!!', 'The product must have a group!' , 'warning');
+
+// return false;
+// }
+
+
+
+}
+
+
+
+
+</script>
+
+
+
+<div class="content-header">
+     <div class="container">
+        <div class="row justify-content-end">
+          {{user_name}}  
+        </div>
+    </div>
+    <div class="container">
+    <div class="row mb-2">
+    <div class="col-sm-6">
+    <h1 class="m-0"> New Client </h1>
+    </div>
+    <div class="col-sm-6">
+    <ol class="breadcrumb float-sm-right">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/clients">Clients</a></li>
+    
+    </ol>
+    </div>
+    </div>
+    </div>
+
+  <br>
+
+  
+<section class="content">
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="box box-primary">
+                    
+            
+            <br>
+
+            <div class="box-body no-padding">
+              <form role="form" action="/clients/create" method="post" onsubmit="return check_fields()">
+                <div class="box-body">
+
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required  >
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="cnpj_cpf">CNPJ/CPF</label>
+                    <input type="text" class="form-control" id="cnpj_cpf" name="cnpj_cpf"   >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="ie">IE</label>
+                    <input type="text" class="form-control" id="ie" name="ie" >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="zip_code">Zip Code</label>
+                    <input type="text" class="form-control" id="zip_code" name="zip_code"  >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" name="address" required  >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="number">Number</label>
+                    <input type="text" class="form-control" id="number" name="number"   >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="complement">Complement</label>
+                    <input type="text" class="form-control" id="complement" name="complement"   >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="district">District</label>
+                    <input type="text" class="form-control" id="district" name="district"   >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" class="form-control" id="city" name="city"   >
+                  </div>
+
+              
+                  <div class="form-group">
+                    <label>State( states of Brazil):</label>
+                    <select class="form-control" id="state" name="state">
+                      <option value="AC">AC</option>
+                      <option value="AL">AL</option>
+                      <option value="AP">AP</option>
+                      <option value="AM">AM</option>
+                      <option value="BA">BA</option>
+                      <option value="CE">CE</option>
+                      <option value="DF">DF</option>
+                      <option value="ES">ES</option>
+                      <option value="GO">GO</option>
+                      <option value="MA">MA</option>
+                      <option value="MT">MT</option>
+                      <option value="MS">MS</option>
+                      <option value="MG">MG</option>
+                      <option value="PA">PA</option>
+                      <option value="PB">PB</option>
+                      <option value="PR">PR</option>
+                      <option value="PE">PE</option>
+                      <option value="PI">PI</option>
+                      <option value="RJ">RJ</option>
+                      <option value="RN">RN</option>
+                      <option value="RS">RS</option>
+                      <option value="RO">RO</option>
+                      <option value="RR">RR</option>
+                      <option value="SC">SC</option>
+                      <option value="SP">SP</option>
+                      <option value="SE">SE</option>
+                      <option value="TO">TO</option>
+                    </select>
+                  </div>
+      
+
+
+
+
+
+                  <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="text" class="form-control" id="phone" name="phone"   >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="cell_phone">Cell Phone</label>
+                    <input type="text" class="form-control" id="cell_phone" name="cell_phone"   >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email"   >
+                  </div>
+      
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                  <button type="submit" class="btn btn-success">Save</button>
+                </div>
+              </form>
+                
+            </div>
+        <!-- /.box-body -->
+        </div>
+     </div>
+</div>   
+</section>
+{% endblock %}
+

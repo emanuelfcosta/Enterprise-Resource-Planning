@@ -1,0 +1,73 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div class="content-header">
+    <div class="container">
+    <div class="row mb-2">
+    <div class="col-sm-6">
+    <h1 class="m-0"> Teste data </h1>
+    </div>
+    <div class="col-sm-6">
+    <ol class="breadcrumb float-sm-right">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/groups">Groups</a></li>
+    
+    </ol>
+    </div>
+    </div>
+    </div>
+
+  <br>
+
+  <script>
+    function check_fields() {
+    
+      //nome
+    if (!$("#name").val())  {
+     swal('Attention!!!', 'The group must have a name!' , 'warning');
+      
+    return false;
+    }
+    
+    }
+    
+    </script>
+
+<section class="content">
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="box box-primary">
+                    
+            
+            <br>
+
+            <div class="box-body no-padding">
+              <form role="form" action="/test/create" method="post" onsubmit="return check_fields()">
+                <div class="box-body">
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name"   >
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="namedata">Name</label>
+                    <input type="date" class="form-control" id="namedata" name="namedata" required  >
+                  </div>  
+      
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                  <button type="submit" class="btn btn-success">Save</button>
+                </div>
+              </form>
+                
+            </div>
+        <!-- /.box-body -->
+        </div>
+     </div>
+</div>   
+</section>
+{% endblock %}
+

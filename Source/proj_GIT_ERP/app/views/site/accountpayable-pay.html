@@ -1,0 +1,218 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div class="content-header">
+  <div class="container">
+    <div class="row justify-content-end">
+      {{user_name}}  
+    </div>
+  </div>
+    <div class="container">
+    <div class="row mb-2">
+    <div class="col-sm-6">
+    <h1 class="m-0"> Account Payable Payment </h1>
+    </div>
+    <div class="col-sm-6">
+    <ol class="breadcrumb float-sm-right">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/accountpayable">Accounts Payable</a></li>
+    
+    </ol>
+    </div>
+    </div>
+    </div>
+
+  <br>
+
+  <script>
+   
+ 
+  // CONVERT COMMA TO POINT
+  
+  function convert_decimal_value(element){
+            
+      var value_with_point = element.replace(',','.');
+      
+    
+      element =  parseFloat(value_with_point).toFixed(2); 
+    
+      return element;
+      
+      }
+    //----------------------------------------------------
+  
+    function check_fields() {
+
+      var v_payment_date = document.getElementById('payment_date').value;
+
+if (v_payment_date == ""){
+  
+
+  swal('Warning!!!', ' Payment Date must be valid!' , 'warning');
+
+  return false;
+} 
+  
+
+
+  // value
+  if (!$("#description").val()) {
+    swal('Warning!!!', 'Account must have a description!' , 'warning');
+  
+  return false;
+  }
+
+
+
+  //Total value
+  if (!$("#total_value").val()) {
+    swal('Warning!!!', 'Total Value Paid Must be a number!' , 'warning');
+  
+  return false;
+  }
+
+  //value
+  var my_value=document.getElementById('value').value;
+
+  my_value = convert_decimal_value(my_value);
+
+  if(isNaN(my_value)){
+               
+               swal('Warning!!!', 'The value must be a number! ', 'warning');
+              
+               document.getElementById('value').focus();
+              
+              return false;     
+          }
+
+//total valeue
+  var my_total_value=document.getElementById('total_value').value;
+
+  my_total_value = convert_decimal_value(my_total_value);
+
+  if(isNaN(my_total_value)){
+             
+             swal('Warning!!!', 'The Total Value Paid must be a number! ', 'warning');
+            
+             document.getElementById('total_value').focus();
+            
+            return false;     
+        }
+
+          
+   
+  
+  // // value
+  // if(isNaN(convert_decimal_value(document.getElementById('value').value))){
+             
+               
+  //            swal('Warning!!!', 'Value must be a number! ', 'warning');
+            
+                      
+  //           return false;     
+  //       }
+
+  
+  }
+  
+        
+   function validateDate(id,field) {
+             
+             var my_result = true;
+                  
+             var RegExPattern = /^((((0?[1-9]|[12]\d|3[01])[\.\-\/](0?[13578]|1[02])      [\.\-\/]((1[6-9]|[2-9]\d)?\d{2}))|((0?[1-9]|[12]\d|30)[\.\-\/](0?[13456789]|1[012])[\.\-\/]((1[6-9]|[2-9]\d)?\d{2}))|((0?[1-9]|1\d|2[0-8])[\.\-\/]0?2[\.\-\/]((1[6-9]|[2-9]\d)?\d{2}))|(29[\.\-\/]0?2[\.\-\/]((1[6-9]|[2-9]\d)?(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)|00)))|(((0[1-9]|[12]\d|3[01])(0[13578]|1[02])((1[6-9]|[2-9]\d)?\d{2}))|((0[1-9]|[12]\d|30)(0[13456789]|1[012])((1[6-9]|[2-9]\d)?\d{2}))|((0[1-9]|1\d|2[0-8])02((1[6-9]|[2-9]\d)?\d{2}))|(2902((1[6-9]|[2-9]\d)?(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)|00))))$/;
+       
+            if (!((id.value.match(RegExPattern)) && (id.value!=''))) {
+                
+               
+                   alert('Date of field' + field + 'must be in format dd/mm/yyyy');
+                
+                  id.focus();
+                
+                  my_result = false;
+                
+               }
+                  return my_result;
+      
+           }
+  
+  //------------------------------------------
+  
+  
+       
+  
+  
+  
+  </script>
+  
+<section class="content">
+
+  <div class="row">
+  	<div class="col-md-12">
+  		<div class="box box-success">
+        
+        <!-- /.box-header -->
+
+             
+              <!-- ------------------------------------------------------------------------------ -->
+                
+
+      <!-- ------------------------------------------------------------------------------ -->
+
+
+
+
+        <!-- form start -->
+        <form id="myForm" role="form" action="/accountpayable-pay/{{accountpayable.id}}" method="post" onsubmit="return check_fields()">
+          <div class="box-body">
+            
+            
+            <div class="form-group">
+              <label for="expiration_date" >Expiration Date:</label>
+              <input type="date" class="form-control" id="expiration_date" name="expiration_date" readonly value="{{accountpayable.expiration_date}}" >
+            </div>
+
+            <div class="form-group">
+              <label for="description">Description:</label>
+              <input type="text" class="form-control" id="description" readonly name="description" value="{{accountpayable.description}}" >
+            </div>
+
+
+            <div class="form-group">
+              <label for="documumento">Document:</label>
+              <input type="text" class="form-control" id="document_number" readonly name="document_number" value="{{accountpayable.document_number}}" >
+            </div>
+
+           
+            <div class="form-group">
+              <label for="value">Value:</label>
+              <input type="text" class="form-control" id="value" name="value" readonly value="{{accountpayable.value}}" >
+            </div>
+
+            <div class="form-group">
+              <label for="total_value">Total Value Paid:</label>
+              <input type="text" class="form-control" id="total_value" name="total_value"  >
+            </div>
+
+            <div class="form-group">
+              <label for="payment_date" >Payment Date:</label>
+              <input type="date" class="form-control" id="payment_date" name="payment_date"   >
+            </div>
+
+
+
+                
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer">
+            <button type="submit" class="btn btn-success">Pay</button>
+          </div>
+        </form>
+      </div>
+  	</div>
+  </div>
+  
+</section>
+{% endblock %}
+

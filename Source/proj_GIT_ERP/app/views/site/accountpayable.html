@@ -1,0 +1,126 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div class="content-header">
+  <div class="container">
+    <div class="row justify-content-end">
+      {{user_name}}  
+    </div>
+  </div>
+    <div class="container">
+    <div class="row mb-2">
+    <div class="col-sm-6">
+    <h1 class="m-0"> Account Payable</h1>
+    </div>
+    <div class="col-sm-6">
+    <ol class="breadcrumb float-sm-right">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/accountpayable">Account Payable</a></li>
+    
+    </ol>
+    </div>
+    </div>
+    </div>
+
+
+  <br>
+
+<section class="content">
+
+    <div class="row">
+
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-money-bill"></i></span>
+        
+            <div class="info-box-content">
+              <span class="info-box-text">Paid</span> 
+              <span class="info-box-number">{{sum_paid_account[0].total_value}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+                       
+          <!-- /.info-box -->
+        </div>
+      
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          
+          <div class="info-box">
+           <span class="info-box-icon bg-red"><i class="fa fa-money-bill"></i></span>
+      
+           <div class="info-box-content">
+             <span class="info-box-text">Unpaid</span> 
+             <span class="info-box-number">{{sum_unpaid_account[0].total_value}}</span>
+           </div>
+           <!-- /.info-box-content -->
+         </div>
+         <!-- /.info-box --> 
+         </div>
+      
+      
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-primary">
+                <br>
+                <div class="box-header">
+                  <a href="/accountpayable/create" class="btn btn-success">New Account Payable </a>
+                </div>
+                 <br>
+    
+                <div class="box-body no-padding">
+                  <table id="tb_accountpayable" class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th style="width: 10px">#</th>
+                        <th>Description</th>
+                        <th>Supplier</th>
+                        <th>Doc. Num.</th>
+                        <th>Expiration Date</th> 
+                        <th>Value</th>
+                        <th>Amount Paid</th>
+                        <th>Payment Date</th>
+                        <th>Status</th>
+                        <th style="width: 140px">&nbsp;</th>
+                 
+                        
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for cp in accountpayable %}
+                  
+                      <tr>
+                        <td>{{cp.id_account}}</td>
+                        <td>{{cp.description}}</td> 
+                        <td>{{cp.name_supplier}}</td> 
+                        <td>{{cp.document_number}}</td> 
+                        <td>{{cp.expiration_date}}</td> 
+                        <td>{{cp.value}}</td> 
+                        <td>{{cp.amount_paid}}</td> 
+                        <td>{{cp.payment_date}}</td>
+                        <td>{{cp.status}}</td>
+                        <td>
+                          <a href="/accountpayable/{{cp.id_account}}" class="btn btn-success btn-xs"><i class="fa fa-edit"></i> Edit</a>
+                          <a href="/accountpayable-reverse/{{cp.id_account}}" onclick="return confirm('Do you really want to reverse this account?')" class="btn btn-warning btn-xs"><i class="fa fa-money"></i> Reverse</a>
+                          <a href="/accountpayable-pay/{{cp.id_account}}" class="btn btn-primary btn-xs"><i class="fa fa-money"></i> Pay</a>
+                          <a href="/accountpayable/{{cp.id_account}}/delete" onclick="return confirm('Do you want to dele this record  id = {{cp.id_account}}?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a>
+                        </td>
+                       
+                       
+                      </tr>
+                      
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.box-body -->
+              </div>
+        </div>
+      </div>
+      
+      
+</section>
+{% endblock %}
+

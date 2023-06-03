@@ -1,0 +1,111 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div class="content-header">
+  <div class="container">
+    <div class="row justify-content-end">
+      {{user_name}}  
+    </div>
+  </div>
+    <div class="container">
+    <div class="row mb-2">
+    <div class="col-sm-6">
+    <h1 class="m-0">  </h1>
+    </div>
+    <div class="col-sm-6">
+    <ol class="breadcrumb float-sm-right">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/report">Reports</a></li>
+    
+    </ol>
+    </div>
+    </div>
+    </div>
+
+
+  <br>
+
+  <script>
+
+    function DateBrazilianFormat(data) {
+      var dia  = data.split("-")[0];
+      var mes  = data.split("-")[1];
+      var ano  = data.split("-")[2];
+    
+      
+      return ("0"+dia).slice(-2) +  ("0"+mes).slice(-2) + '-' .ano  ;
+      
+    }
+    
+    
+    </script>  
+
+<section class="content">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+          
+        <div class=" text-center">
+          <h1>
+            Account Payable Paid Report
+          </h1>
+          
+          <h4>
+             From {{period.begin}} to {{period.end}}
+          </h4>
+          <br>
+        </div>
+        <h3>
+           Total Value $: {{value_accountpayable[0]['total_value']}}
+        </h3>
+            
+         <br>
+              <div class="box-body no-padding">
+                <table  class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th style="width: 10px" align="right">#</th>
+                      <th>Description</th>
+                      <th>Supplier</th>
+                      <th>Doc. Num.</th>
+                     <th>Expiration Date</th> 
+                     <th>Value</th>
+                     <th>Total Value</th>
+                     <th>Payment Date</th>
+                     <th>Status</th>
+                     
+               
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for ap in accountpayable %}
+                    
+                    <tr>
+                      <td>{{ap.id}}</td>
+                      <td>{{ap.description}}</td>
+                      <td>{{ap.name_supplier}}</td> 
+                      <td>{{ap.document_number}}</td> 
+                      <td>{{ap.expiration_date}}</td> 
+                      <td>{{ap.value}}</td> 
+                      <td>{{ap.total_value}}</td>
+                      <td>{{ap.payment_date}}</td>
+                      <td>{{ap.status}}</td>            
+                     
+                    </tr>
+                    
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.box-body -->
+            </div>
+        </div>
+    </div>   
+
+
+</section>
+{% endblock %}
+

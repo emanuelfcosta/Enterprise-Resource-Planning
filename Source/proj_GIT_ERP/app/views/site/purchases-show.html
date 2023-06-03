@@ -1,0 +1,251 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div class="content-header">
+  <div class="container">
+    <div class="row justify-content-end">
+      {{user_name}}  
+    </div>
+  </div>
+    <div class="container">
+    <div class="row mb-2">
+    <div class="col-sm-6">
+    <h1 class="m-0"> Show Purchases </h1>
+    </div>
+    <div class="col-sm-6">
+    <ol class="breadcrumb float-sm-right">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/purchases">Purchases</a></li>
+    
+    </ol>
+    </div>
+    </div>
+    </div>
+
+  
+
+  <script>
+    
+    
+    </script>
+
+<section class="content">
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="box box-primary">
+             
+            
+            
+            <br>
+
+            <div class="box-body no-padding">
+              <form role="form" action="/purchases" method="post" onsubmit="return check_fields()">
+                <div class="box-body">
+
+
+                  <div class="row">
+                    <div class="col-xs-6 col-md-2">
+                      
+                      <div class="form-group">
+                        <label for="uf">Date:</label>
+                        <input type="text" class="form-control" id="date_sale" name="date_sale" value="{{purchase[0].date_purchase}}" readonly >
+                      </div>
+      
+                    </div>
+                    <div class="col-xs-6 col-md-2">
+                      <div class="form-group">
+                        <label for="uf">Time:</label>
+                        <input type="text" class="form-control" id="time_sale" name="time_sale" value="{{purchase[0].time_purchase}}" readonly >
+                      </div>
+      
+                    </div>
+      
+                    <div class="col-xs-6 col-md-8">
+                      <div class="form-group">
+                        <label for="uf">Supplier:</label>
+                        <input type="text" class="form-control" id="client_name" name="client_name" value="{{purchase[0].supplier_name}}" readonly >
+                      </div>
+      
+                    </div>
+      
+                  </div>
+
+                  <div class="row">
+
+                    <div class="col-xs-6 col-md-4">
+                      <div class="form-group">
+                        <label for="uf">Payment Method:</label>
+                        <input type="text" class="form-control" id="payment_method_name" name="payment_method_name" value="{{purchase[0].payment_method_name}}" readonly >
+                      </div>
+      
+                    </div>
+      
+                    <div class="col-xs-6 col-md-4">
+                      <div class="form-group">
+                        <label for="uf">Cost Center:</label>
+                        <input type="text" class="form-control" id="cost_center_name" name="cost_center_name" value="{{purchase[0].cost_center_name}}" readonly >
+                      </div>
+      
+                    </div>
+      
+                    <div class="col-xs-6 col-md-2">
+                      <div class="form-group">
+                        <label for="uf">Quantity Items:</label>
+                        <input type="text" class="form-control" id="quantity_items" name="quantity_items" value="{{purchase[0].quantity_items}}" readonly >
+                      </div>
+      
+                    </div>
+      
+                    <div class="col-xs-6 col-md-2">
+                      <div class="form-group">
+                        <label for="uf">Purchase Type:</label>
+                        <input type="text" class="form-control" id="sale_type" name="sale_type" value="{{purchase[0].purchase_type}}" readonly >
+                      </div>
+      
+                    </div>
+      
+      
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xs-6 col-md-3">
+                      <div class="form-group">
+                        <label for="uf">Value:</label>
+                        <input type="text" class="form-control" id="value_sale" name="value_sale" value="{{purchase[0].value_purchase}}" readonly >
+                      </div>
+      
+                    </div>
+      
+                    <div class="col-xs-6 col-md-2">
+                      <div class="form-group">
+                        <label for="uf">Discount(%):</label>
+                        <input type="text" class="form-control" id="percentage_discount" name="percentage_discount" value="{{purchase[0].percentage_discount}}" readonly >
+                      </div>
+      
+                    </div>
+      
+                    <div class="col-xs-6 col-md-2">
+                      <div class="form-group">
+                        <label for="uf">Discount($):</label>
+                        <input type="text" class="form-control" id="value_discount_real" name="value_discount_real" value="{{purchase[0].value_discount_real}}" readonly >
+                      </div>
+      
+                    </div>
+      
+                    <div class="col-xs-6 col-md-3">
+                      <div class="form-group">
+                        <label for="uf">Value With Discount:</label>
+                        <input type="text" class="form-control" id="final_value_after_discount" name="final_value_after_discount" value="{{purchase[0].final_value_after_discount}}" readonly >
+                      </div>
+      
+                    </div>
+      
+                  </div>
+      
+                </div>
+                <br>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                 
+                  <div class="row">
+                    <div class="col-xs-9 col-md-4">
+                        <h3 class="text-primary">Products</h3> 
+                        
+                    </div>
+                  </div>
+
+                  <div class="row">
+
+              
+                    <div class="col-xs-9 col-md-12">
+      
+                    <table  class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th style="width: 10px">#</th>
+                          <th>Product</th>
+                          <th>Quantity</th>
+                          <th>Unit Value</th> 
+                          <th>Subtotal</th>
+                                      
+                          
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for sp in purchaseproduct %}
+                        <tr>
+                          <td>{{sp.id_product}}</td>
+                          <td>{{sp.name_product}}</td>
+                          <td>{{sp.quantity}}</td>
+                          <td>{{sp.unit_value}}</td>
+                          <td>{{sp.subtotal}}</td>
+                                            
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                    </div>
+      
+                </div>
+
+                <br>
+
+                <div class="row">
+                  <div class="col-xs-9 col-md-4">
+                      <h3 class="text-danger">Account</h3> 
+                      
+                  </div>
+                </div>
+      
+
+                <div class="row">
+
+                  <div class="col-xs-9 col-md-12">   
+                
+                  <table  class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th style="width: 10px">#</th>
+                        <th>Value</th>
+                        <th>Amount Paid</th> 
+                        <th>Expiration Date</th>
+                        <th>Payment Date</th>
+                        <th>Status</th>
+                                    
+                        
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for sc in purchasesaccounts %}
+                      <tr>
+                        <td>{{sc.id_account}}</td>
+                        <td>{{sc.account_value}}</td>
+                        <td>{{sc.amount_paid}}</td>
+                        <td>{{sc.expiration_date}}</td>
+                        <td>{{sc.payment_date}}</td>
+                        <td>{{sc.status}}</td>
+                                          
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  </div>
+                </div>
+      
+      
+
+
+
+                </div>
+              </form>
+                
+            </div>
+        <!-- /.box-body -->
+        </div>
+     </div>
+</div>   
+</section>
+{% endblock %}
+
